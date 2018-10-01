@@ -1,0 +1,20 @@
+db:
+  image: mongo:3.4.6
+  container_name: db-prod
+  environment:
+    - MONGO_LOG_DIR=/data/mongo/log
+  volumes:
+      - /home/deploy/db/skrskr-prod/db:/data/db
+      - /home/deploy/db/skrskr-prod/log:/data/mongo/log
+  ports:
+    - "27017:27017"
+  command: mongod --smallfiles --logpath=/data/mongo/log/mongo.log # --quiet
+
+skrskr:
+  image: gmirror/skrskr
+  command: python3 -u run.py runserver -h 0.0.0.0 -p 8001 --thread
+  ports:
+    - "8022:8001"
+  env_file: /home/deploy/envs/skrskr.prod.env
+  links:
+    - db

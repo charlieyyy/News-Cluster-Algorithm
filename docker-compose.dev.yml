@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  db:
+    image: mongo:3.4.6
+    environment:
+      - MONGO_LOG_DIR=/data/mongo/log
+    volumes:
+      - /home/deploy/db/skrskr-dev/db:/data/db
+      - /home/deploy/db/skrskr-dev/log:/data/mongo/log
+    ports:
+      - "27020:27017"
+    command: mongod --smallfiles --logpath=/data/mongo/log/mongo.log # --quiet
+
+  skrskr:
+    build:
+      context: .
+      dockerfile: Dockerfile/docker-test
+    image: gmirror/skrskr:dev
+    command: bash -c "python3 -u run.py runserver -h 0.0.0.0 -p 8001 --thread"
+    ports:
+      - "8012:8001"
+    env_file: /home/deploy/envs/skrskr.dev.env
+    links:
+      - db
