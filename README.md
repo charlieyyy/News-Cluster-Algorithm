@@ -9,7 +9,7 @@
 ---
 ##### Project layout(Incomplete)
  
- ⋅⋅* API
+ * API
      ⋅⋅* article.py -> for receiving news from crawlers
      ⋅⋅* cluster.py -> for posting clutersing results 
  ⋅⋅* Common -> some utils
