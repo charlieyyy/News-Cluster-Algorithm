@@ -4,5 +4,19 @@
 
 #### The main part of the cluster algorith uses tf-idf to get key words, and second clustering after that. 
 
+#### This project is accomplished using python and mongoDB.
+
 ---
-##### project layout
+##### Project layout(Incomplete)
+ 
+ ⋅⋅* API
+     ⋅⋅* article.py -> for receiving news from crawlers
+     ⋅⋅* cluster.py -> for posting clutersing results 
+ ⋅⋅* Common -> some utils
+     ⋅⋅* algorithm.py -> the main function for clustering
+ ⋅⋅* Model 
+     ⋅⋅* article.py -> define raw article data structure, indexed by url.
+     ⋅⋅* cluster.py -> define raw article data structure, indexed by topic.url.
+ ⋅⋅* Service
+      ⋅⋅* cluster.py -> saving data into database
+ ⋅⋅* Tests
